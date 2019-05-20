@@ -74,7 +74,7 @@ vox_plot.width = (1500., 1500., 1500.)
 vox_plot.pixels = (200, 200, 200)
 vox_plot.filename = 'plot_3d_tokamak'
 vox_plot.color_by = 'material'
-#vox_plot.colors = {copper: 'blue'}  # materials can be coloured using this command
+vox_plot.colors = {copper: 'blue'}  # materials can be coloured using this command
 plots = openmc.Plots([vox_plot])
 plots.export_to_xml()
 

@@ -25,6 +25,24 @@ enriched_Li4SiO4.add_element('Si',1.0,percent_type='ao')
 enriched_Li4SiO4.add_element('O',4.0,percent_type='ao')
 enriched_Li4SiO4.set_density('g/cm3',1.844) # this density is lower as there is more Li6 and less
 
+natural_Li2SiO3 = openmc.Material()
+natural_Li2SiO3.add_element('Li',2.0,percent_type='ao')
+natural_Li2SiO3.add_element('Si',1.0,percent_type='ao')
+natural_Li2SiO3.add_element('O',3.0,percent_type='ao')
+natural_Li2SiO3.set_density('g/cm3',2.619) # this density was found using crystal volumes function
+
+natural_Li2ZrO3 = openmc.Material()
+natural_Li2ZrO3.add_element('Li',2.0,percent_type='ao')
+natural_Li2ZrO3.add_element('Zr',1.0,percent_type='ao')
+natural_Li2ZrO3.add_element('O',3.0,percent_type='ao')
+natural_Li2ZrO3.set_density('g/cm3',2.529) # this density was found using crystal volumes function
+
+natural_Li2TiO3 = openmc.Material()
+natural_Li2TiO3.add_element('Li',2.0,percent_type='ao')
+natural_Li2TiO3.add_element('Ti',2.0,percent_type='ao')
+natural_Li2TiO3.add_element('O',3.0,percent_type='ao')
+natural_Li2TiO3.set_density('g/cm3',2.899) # this density was found using crystal volumes function
+
 #natural_Li4SiO4 density 1.8770150075137564 g/cm3 
 #enriched_Li4SiO4 density 1.8441466011318948 g/cm3 #60% Li6
 #natural_Li2SiO3 density 2.619497078021483 g/cm3
@@ -39,7 +57,14 @@ cross_section_natural_Li4SiO4_MT16 = data[0]
 Energy_enriched_Li4SiO4_MT16, data = openmc.calculate_cexs(enriched_Li4SiO4, 'material', Endf_MT_number )
 cross_section_enriched_Li4SiO4_MT16 = data[0]
 
+Energy_natural_Li2SiO3_MT16, data = openmc.calculate_cexs(natural_Li2SiO3, 'material', Endf_MT_number )
+cross_section_natural_Li2SiO3_MT16 = data[0]
 
+Energy_natural_Li2ZrO3_MT16, data = openmc.calculate_cexs(natural_Li2ZrO3, 'material', Endf_MT_number )
+cross_section_natural_Li2ZrO3_MT16 = data[0]
+
+Energy_natural_Li2TiO3_MT16, data = openmc.calculate_cexs(natural_Li2TiO3, 'material', Endf_MT_number )
+cross_section_natural_Li2TiO3_MT16 = data[0]
 
 trace1= Scatter(x=Energy_natural_Li4SiO4_MT16, 
                 y=cross_section_natural_Li4SiO4_MT16, 
@@ -51,17 +76,31 @@ trace2= Scatter(x=Energy_enriched_Li4SiO4_MT16,
                 mode = 'lines', 
                 name='enriched Li4SiO4 (n,t)')
 
+trace3= Scatter(x=Energy_natural_Li2SiO3_MT16, 
+                y=cross_section_natural_Li2SiO3_MT16, 
+                mode = 'lines', 
+                name='natural Li2SiO3 (n,t)')
+
+trace4= Scatter(x=Energy_natural_Li2ZrO3_MT16, 
+                y=cross_section_natural_Li2ZrO3_MT16, 
+                mode = 'lines', 
+                name='natural Li2ZrO3 (n,t)')
+
+trace5= Scatter(x=Energy_natural_Li2TiO3_MT16, 
+                y=cross_section_natural_Li2TiO3_MT16, 
+                mode = 'lines', 
+                name='natural Li2TiO3 (n,t)')            
 layout = {'title':'Material cross sections',
           'xaxis':{'title':'Energy (eV)',
                    #'range':(1e-10,14.1e6), 
                    'type':'log'
                   },
-          'yaxis':{'title':'Macroscopic Cross Section (1/cm2)',
+          'yaxis':{'title':'Macroscopic Cross Section (1/cm)',
                    'type':'log'
                   },
          }
 
-plot({'data':[trace1,trace2],
+plot({'data':[trace1,trace2,trace3,trace4,trace5],
       'layout':layout},
       filename='3_example_material_plot.html')
 

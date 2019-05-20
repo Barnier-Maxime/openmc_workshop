@@ -49,5 +49,5 @@ plots.export_to_xml()
 openmc.plot_geometry()
 
 os.system('convert plot.ppm plot.png')
-#os.system('eog plot.png')
+os.system('eog plot.png')
 os.system('xdg-open plot.png')

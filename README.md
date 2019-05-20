@@ -96,7 +96,7 @@ This file shows us how to plot tritium production in Li4SiO4 which is a candidat
 
 Please allow 20 minutes for this task.
 
-Expected outputs from this task are on [slide 6 of the presentation](https://slides.com/shimwell/neutronics_workshop/#/6)
+Expected outputs from this task are on [slide 14 of the presentation](https://slides.com/shimwell/neutronics_workshop/#/14)
 
 OpenMC can provide both 2D and 3D visualizations of the Constructive Solid Geometry ([CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry)).
 There are two methods of producing 2D slice views of the geometry

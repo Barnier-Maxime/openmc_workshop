@@ -5,7 +5,7 @@
 __author__      = "Jonathan Shimwell"
 
 import openmc
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from plotly.offline import download_plotlyjs, plot
 from plotly.graph_objs import Scatter, Layout, Histogram , Bar, Scatter3d
 from plotly.figure_factory import create_quiver
@@ -49,16 +49,16 @@ source.space = openmc.stats.Point((0,0,0))
 source.angle = openmc.stats.Isotropic()
 
 # sets the energy of neutrons to 14MeV (monoenergetic)
-source.energy = openmc.stats.Discrete([14e6], [1])
+#source.energy = openmc.stats.Discrete([14e6], [1])
 
 # sets the energy of neutrons to a fission energy distribution
-#source.energy = openmc.stats.Watt(a=988000.0, b=2.249e-06)
+source.energy = openmc.stats.Watt(a=988000.0, b=2.249e-06)
 
 # sets the energy of neutrons to a fusion energy distribution, energy is 14.08MeV, atomic mass for D + T = 5, temperature is 20KeV
 #source.energy = openmc.stats.Muir(e0=14080000.0, m_rat=5.0, kt=20000.0) 
 
 # sets the source position, direction and energy to be read from a file
-source.file = 'source_1000_particles.h5'
+#source.file = 'source_1000_particles.h5'
 
 sett.source = source
 
@@ -99,11 +99,9 @@ plot({'data':traces,
       filename='particle_energy_histogram.html'
       )
 
-
-
 text = ['Energy = '+str(i)+' eV' for i in sp.source['E']]
 
-# plots 3d poisitons of particles coloured by energy
+# plots 3d positions of particles coloured by energy
 traces=[Scatter3d(x=sp.source['xyz'][:,0], 
                   y=sp.source['xyz'][:,1],
                   z=sp.source['xyz'][:,2],

@@ -40,8 +40,8 @@ for isotope_name in tqdm(candiate_fusion_neutron_multipiers_list):
 
       try:
             isotope_object = openmc.data.IncidentNeutron.from_hdf5(os.path.join(nuclear_data_path,isotope_name+'.h5')) # you may have to change this directory
-            energy = isotope_object.energy['293K'] # 294K is the temperature for tendl this is 293K
-            cross_section = isotope_object[MT_number].xs['293K'](energy)
+            energy = isotope_object.energy['294K'] # 294K is the temperature for tendl this is 293K
+            cross_section = isotope_object[MT_number].xs['294K'](energy)
             traces.append(Scatter(x=energy,
                                   y=cross_section,
                                   mode = 'lines',
@@ -55,8 +55,8 @@ for isotope_name in tqdm(candiate_fusion_tritium_producers_list):
 
       try:
             isotope_object = openmc.data.IncidentNeutron.from_hdf5(os.path.join(nuclear_data_path,isotope_name+'.h5')) # you may have to change this directory
-            energy = isotope_object.energy['293K'] # 294K is the temperature for tendl this is 293K
-            cross_section = isotope_object[MT_number_2].xs['293K'](energy)
+            energy = isotope_object.energy['294K'] # 294K is the temperature for tendl this is 293K
+            cross_section = isotope_object[MT_number_2].xs['294K'](energy)
             traces.append(Scatter(x=energy,
                                   y=cross_section,
                                   mode = 'lines',
@@ -65,11 +65,11 @@ for isotope_name in tqdm(candiate_fusion_tritium_producers_list):
                          )
       except:
             print('isotope ', isotope_name, 'failed to find cross section at ',os.path.join(nuclear_data_path,isotope_name+'.h5'))
-
+print(traces)
 layout = {'title':'Isotope cross sections MT '+ str(MT_number)+ str(MT_number_2),
           'xaxis':{'title':'Energy (eV)',
                    'range':(0,14.1e6),
-                   'type':'log'
+                   'type':'linear'
                   },
           'yaxis':{'title':'Cross section (barns)',
                    'type':'log'
