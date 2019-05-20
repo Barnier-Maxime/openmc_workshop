@@ -92,3 +92,5 @@ openmc.plot_geometry()
 
 os.system('openmc-voxel-to-vtk plot_3d.h5 -o plot_3d.vti')
 os.system('paraview plot_3d.vti') # visit might be preffered
+
+
