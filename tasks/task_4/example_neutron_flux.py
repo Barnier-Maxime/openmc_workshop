@@ -12,7 +12,7 @@ import os
 mats = openmc.Materials()
 
 breeder_material = openmc.Material(1, "PbLi") #Pb84.2Li15.8 with natural enrichment of Li6
-enrichment_fraction = 0.07 #change the enrichment upto 1.0
+enrichment_fraction = 0.06 #change the enrichment upto 1.0
 breeder_material.add_element('Pb', 84.2,'ao')
 breeder_material.add_nuclide('Li6', enrichment_fraction*15.8, 'ao')
 breeder_material.add_nuclide('Li7', (1.0-enrichment_fraction)*15.8, 'ao')
@@ -73,7 +73,7 @@ mesh_filter = openmc.MeshFilter(mesh)
 # Create mesh tally to score flux
 mesh_tally = openmc.Tally(1,name='tallies_on_mesh')
 mesh_tally.filters = [mesh_filter]
-mesh_tally.scores = ['flux'] # change flux to absorption
+mesh_tally.scores = ['absorption'] # change flux to absorption
 tallies.append(mesh_tally)
 
 
@@ -86,11 +86,11 @@ model.run()
 sp = openmc.StatePoint('statepoint.'+str(batches)+'.h5')
 
 # access the flux tally
-flux_tally = sp.get_tally(scores=['flux'])  # change flux to absorption
-flux_slice = flux_tally.get_slice(scores=['flux']) # change flux to absorption
+flux_tally = sp.get_tally(scores=['absorption'])  # change flux to absorption
+flux_slice = flux_tally.get_slice(scores=['absorption']) # change flux to absorption
 flux_slice.mean.shape = (mesh_width, mesh_height)
 
 fig = plt.subplot()
 plt.show(fig.imshow(flux_slice.mean))
 
-plt.show(universe.plot(width=(400,400),basis='xz'))
+plt.show(universe.plot(width=(3000,3000),basis='xz'))

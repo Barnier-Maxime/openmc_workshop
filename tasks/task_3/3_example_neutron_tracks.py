@@ -49,9 +49,9 @@ geom = openmc.Geometry(universe)
 
 # Instantiate a Settings object
 sett = openmc.Settings()
-batches = 1
+batches = 2
 sett.batches = batches
-sett.inactive = 0
+sett.inactive = 1
 sett.particles = 20
 sett.particle = "neutron"
 sett.track = (1,2,4)
@@ -63,7 +63,7 @@ source.space = openmc.stats.Point((0,0,0))
 source.angle = openmc.stats.Isotropic()
 source.energy = openmc.stats.Discrete([14e6], [1])
 
-source.file = 'source_1000_particles.h5'
+#source.file = 'source_1000_particles.h5'
 sett.source = source
 
 
@@ -75,7 +75,7 @@ for i in range(1,11):
    print('converting h5 track file to vtpi')
    os.system('openmc-track-to-vtk track_1_1_'+str(i)+'.h5 -o track_1_1_'+str(i))
 
-os.system('paraview track_1_1_'+str(i)+'.pvtp')
+#os.system('paraview track_1_1_'+str(i)+'.pvtp')
 
 
 vox_plot = openmc.Plot()

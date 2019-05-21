@@ -64,23 +64,28 @@ model.run()
 
 sp = openmc.StatePoint('statepoint.'+str(batches)+'.h5')
 
-print('energy of neutrons =',sp.source['xyz']) # these neutrons are all created
+print('energy of neutrons =',len(sp.source['r']['x'])) # these neutrons are all created
+print('energy of neutrons =',len(sp.source['u']['x'])) # these neutrons are all created
 
 
 
 # plot the neutron birth locations and trajectory
 traces =[{
     'type': 'cone',
-    'cauto' : False,
-    'x':sp.source['xyz'][:,0],'y':sp.source['xyz'][:,1],'z':sp.source['xyz'][:,2],
-    'u':sp.source['uvw'][:,0],'v':sp.source['uvw'][:,1],'w':sp.source['uvw'][:,2],
-    'cmin':0,'cmax':1,
-    "anchor": "tail",
-    "colorscale": 'Viridis',
-    "hoverinfo": "u+v+w+norm",
-    "sizemode":"absolute",
-    "sizeref":3,
-    "showscale":False,
+    # 'cauto' : False,
+    'x':sp.source['r']['x'][0:2],
+    'y':sp.source['r']['y'][0:2],
+    'z':sp.source['r']['z'][0:2],
+    'u':sp.source['u']['x'][0:2],
+    'v':sp.source['u']['y'][0:2],
+    'w':sp.source['u']['z'][0:2],
+    # 'cmin':0,'cmax':1,
+    # "anchor": "tail",
+    # "colorscale": 'Viridis',
+    # "hoverinfo": "u+v+w+norm",
+    # "sizemode":"absolute",
+    # "sizeref":3,
+    # "showscale":False,
     }]
 
 layout = {'title':'Neutron initial directions coloured by direction',
