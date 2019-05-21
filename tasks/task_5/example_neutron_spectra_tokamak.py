@@ -132,16 +132,16 @@ traces.append(Scatter(x=energy_bins,
               )
 
 
-# spectra_tally = sp.get_tally(name='first_wall_spectra') # add another tally for first_wall_spectra
-# spectra_tally_result = [entry[0][0] for entry in spectra_tally.mean] 
-# spectra_tally_std_dev = [entry[0][0] for entry in spectra_tally.std_dev] 
+spectra_tally = sp.get_tally(name='first_wall_spectra') # add another tally for first_wall_spectra
+spectra_tally_result = [entry[0][0] for entry in spectra_tally.mean] 
+spectra_tally_std_dev = [entry[0][0] for entry in spectra_tally.std_dev] 
 
-# traces.append(Scatter(x=energy_bins, 
-#                       y=spectra_tally_result,
-#                       name='first_wall_spectra',
-#                       line=dict(shape='hv')
-#                      )
-#               )
+traces.append(Scatter(x=energy_bins, 
+                       y=spectra_tally_result,
+                       name='first_wall_spectra',
+                       line=dict(shape='hv')
+                      )
+               )
 
 
 
